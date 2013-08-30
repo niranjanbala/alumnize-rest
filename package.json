@@ -3,7 +3,7 @@
     "description": "Employee Directory API",
     "version": "0.0.1",
     "private": true,
-    "main": "server.js"
+    "main": "server.js",
     "dependencies": {
         "express": "3.x",
         "mongodb": "*"
