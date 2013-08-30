@@ -1,5 +1,5 @@
 {
-    "name":"alumnize-rest" 
+    "name":"alumnize-rest", 
     "description": "Employee Directory API",
     "version": "0.0.1",
     "private": true,
