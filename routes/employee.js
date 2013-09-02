@@ -1,18 +1,23 @@
 var MongoClient = require('mongodb').MongoClient,
     Server = require('mongodb').Server,
     db;
+var userName="heroku_app17819681";
+var password="rhnmk5dv8hcg0ppbq35kav284l";
+var hostName="ds043338.mongolab.com"
+var port="43338";
+var dbName="heroku_app17819681";
+var mongoClient = new MongoClient(new Server(hostName, port));
 
-var mongoClient = new MongoClient(new Server('localhost', 27017));
-mongoClient.open(function(err, mongoClient) {
-    db = mongoClient.db("employeedb09");
+MongoClient.connect("mongodb://heroku_app17819681:rhnmk5dv8hcg0ppbq35kav284l@ds043338.mongolab.com:43338/heroku_app17819681", function(err, mDb) {
+    db=mDb;
     db.collection('employees', {strict:true}, function(err, collection) {
         if (err) {
             console.log("The 'employees' collection doesn't exist. Creating it with sample data...");
             populateDB();
         }
     });
-});
 
+});
  
 exports.findById = function(req, res) {
     console.log(req.params);
