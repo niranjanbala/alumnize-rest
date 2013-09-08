@@ -4,6 +4,7 @@ var express = require('express'),
 
 var app = express();
 app.use(express.logger());
+app.use(express.bodyParser());
 app.get('/employees/:id/reports', wines.findByManager);
 app.get('/employees/:id', wines.findById);
 app.get('/employees', wines.findAll);
