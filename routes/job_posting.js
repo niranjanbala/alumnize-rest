@@ -7,7 +7,15 @@ exports.findById = function(req, res) {
 
 };
 exports.postedByUser = function(req, res) {
-	res.jsonp({});
+	    console.log(req.params);
+	    var id = parseInt(req.params.id);
+	    console.log('findById: ' + id);
+	    db.collection('employees', function(err, collection) {
+	        collection.findOne({'id': id}, function(err, item) {
+	            console.log(item);
+	            res.jsonp(item);
+	        });
+	    });
 };
 exports.postJob = function(req, res) {
 
