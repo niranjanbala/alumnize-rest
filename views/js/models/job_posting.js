@@ -1,13 +1,12 @@
 directory.JobPosting = Backbone.Model.extend({
-
-    urlRoot:"http://frozen-reaches-5015.herokuapp.com/employees",
     defaults: {
-	        id: null,
+	        _id: null,
 	        title: "",
 	        description: "",
 	        company: "",
 	        lastDate: "",
-	        postedBy: null
+	        postedBy: null,
+	        applicants:[]
 	},
     initialize:function () {
  		this.validators = {};
@@ -25,12 +24,9 @@ directory.JobPosting = Backbone.Model.extend({
 	                }
 	            }
 	        }
-
 	        return _.size(messages) > 0 ? {isValid: false, messages: messages} : {isValid: true};
     },
-
 });
-
 directory.JobPostingCollection = Backbone.Collection.extend({
     model: directory.JobPosting
 });
