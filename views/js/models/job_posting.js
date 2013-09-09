@@ -5,8 +5,7 @@ directory.JobPosting = Backbone.Model.extend({
 	        description: "",
 	        company: "",
 	        lastDate: "",
-	        postedBy: null,
-	        applicants:[]
+	        postedBy: null
 	},
     initialize:function () {
  		this.validators = {};
