@@ -3,15 +3,20 @@ directory.SearchView = Backbone.View.extend({
 		        "click .search" : "search"
 	    },
 	search: function() {
-		console.log(this.jobPostingSearch);
-		console.log('search');
+		var eid=this.model.attributes.postedBy.id;
+		this.searchResults.fetch(
+				{
+					url: "http://frozen-reaches-5015.herokuapp.com/employees/"+eid+"/searchJobs",
+					reset: true, data: this.jobPostingSearch.attributes
+					}
+		);
 	},
     render: function () {
 		this.jobPostingSearch=new directory.JobPosting();
         this.$el.html(this.template(this.model.attributes));
         $('#search', this.el).html(new directory.SearchFormView({model:this.jobPostingSearch}).render().el);
-        var searchResults=new directory.JobPostingCollection();
-        $('#results', this.el).html(new directory.SearchListView({model: searchResults}).render().el);
+        this.searchResults=new directory.JobPostingCollection();
+        $('#results', this.el).html(new directory.SearchListView({model: this.searchResults}).render().el);
         return this;
     }
 });
@@ -47,7 +52,17 @@ directory.SearchListView = Backbone.View.extend({
     tagName:'ul',
 
     className:'nav nav-list',
+    events: {
+	        "change" : "change"
+    },
+    change: function() {
+				console.log('changed');
+		        this.$el.empty();
+		        _.each(this.model.models, function (jobPosting) {
+		            this.$el.append(new directory.SearchListItemView({model:jobPosting}).render().el);
+		        }, this);
 
+	},
     initialize:function () {
         var self = this;
         this.model.on("reset", this.render, this);
@@ -68,12 +83,10 @@ directory.SearchListView = Backbone.View.extend({
 directory.SearchListItemView = Backbone.View.extend({
 
     tagName:"li",
-
     initialize:function () {
         this.model.on("change", this.render, this);
         this.model.on("destroy", this.close, this);
     },
-
     render:function () {
         // The clone hack here is to support parse.com which doesn't add the id to model.attributes. For all other persistence
         // layers, you can directly pass model.attributes to the template function
@@ -143,7 +156,7 @@ directory.NewJobPostView = Backbone.View.extend({
             success: function (model) {
                 self.render();
                 console.log(model);
-                app.navigate('employees/' + model.postedBy.id, false);
+                app.navigate('employees/' + eid, false);
                 directory.utils.showAlert('Success!', 'Job posted successfully', 'alert-success');
             },
             error: function () {
