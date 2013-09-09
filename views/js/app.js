@@ -65,7 +65,7 @@ directory.Router = Backbone.Router.extend({
         var self = this;
         employee.fetch({
             success: function (data) {
-				var post = new directory.JobPosting({id: null, postedBy:data.attributes});
+				var post = new directory.JobPosting({postedBy:data.attributes});
                 self.$content.html(new directory.NewJobPostView({model: post}).el);
             }
         });

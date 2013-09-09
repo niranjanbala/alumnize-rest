@@ -110,7 +110,6 @@ directory.NewJobPostView = Backbone.View.extend({
     saveJob: function () {
         var self = this;
         var eid=this.model.attributes.postedBy.id;
-        console.log(this.model);
         this.model.save(null, {
 			url: "http://frozen-reaches-5015.herokuapp.com/employees/"+eid+"/postJob",
             success: function (model) {
