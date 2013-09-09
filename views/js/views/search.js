@@ -2,7 +2,6 @@ directory.SearchView = Backbone.View.extend({
 	 events: {
 		        "click .search" : "search"
 	    },
-	var jobPostingSearch;
 	search: function() {
 		console.log(this.jobPostingSearch);
 		console.log('search');
