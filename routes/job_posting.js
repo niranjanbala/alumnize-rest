@@ -34,13 +34,15 @@ exports.postedByUser = function(req, res) {
 	    });
 };
 exports.postJob = function(req, res) {
-	    var id = parseInt(req.params.id);
+	console.log(request.body);      // your JSON
+  	res.send(req.body);    // echo the result back
+	/*    var id = parseInt(req.params.id);
 	    console.log('request =' + JSON.stringify(req.body))
 	    db.collection('employees', function(err, collection) {
 	        collection.findOne({'id': id}, function(err, item) {
 	            res.jsonp(item);
 	        });
-	    });
+	    });*/
 };
 exports.findAll = function(req, res) {
 
