@@ -34,7 +34,6 @@ exports.postedByUser = function(req, res) {
 	    });
 };
 exports.postJob = function(req, res) {
-	console.log(request.body);      // your JSON
   	res.send(req.body);    // echo the result back
 	/*    var id = parseInt(req.params.id);
 	    console.log('request =' + JSON.stringify(req.body))
