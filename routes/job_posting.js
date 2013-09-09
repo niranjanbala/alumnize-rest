@@ -35,7 +35,10 @@ exports.postedByUser = function(req, res) {
 };
 exports.postJob = function(req, res) {
 		var id = parseInt(req.params.id);
+		console.log('posted request =' + req);
+		console.log('posted request =' + req.params);
 		console.log('posted request =' + req.body);
+		console.log('posted request =' + req.body.title);
 		var employees = [
 				req.body
 		  ];
