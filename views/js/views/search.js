@@ -16,6 +16,26 @@ directory.SearchView = Backbone.View.extend({
     }
 });
 directory.SearchFormView = Backbone.View.extend({
+	    events: {
+		        "change" : "change"
+    	},
+	    change: function (event) {
+	        // Remove any existing alert message
+	        directory.utils.hideAlert();
+	        // Apply the change to the model
+	        var target = event.target;
+	        var change = {};
+	        change[target.name] = target.value;
+	        this.model.set(change);
+
+	        // Run validation rule (if any) on changed item
+	        var check = this.model.validateItem(target.id);
+	        if (check.isValid === false) {
+	            directory.utils.addValidationError(target.id, check.message);
+	        } else {
+	            directory.utils.removeValidationError(target.id);
+	        }
+	    },
     render:function () {
         this.$el.html(this.template(this.model.attributes));
         return this;
