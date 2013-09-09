@@ -11,7 +11,6 @@ app.get('/employees', wines.findAll);
 app.get('/employees/:id/jobPosts',jobs.postedByUser);
 app.post('/employees/:id/postJob',jobs.postJob);
 app.put('/employees/:id/postJob',jobs.postJob);
-app.get('/employees/:id/postJob',jobs.postJob);
 app.get('/jobPosts', jobs.findAll);
 
 var port = process.env.PORT || 5000;
