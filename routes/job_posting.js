@@ -35,7 +35,7 @@ exports.postedByUser = function(req, res) {
 };
 exports.postJob = function(req, res) {
 	    var id = parseInt(req.params.id);
-	    console.log(JSON.parse(req.body));
+	    console.log('request =' + JSON.stringify(request.body))
 	    db.collection('employees', function(err, collection) {
 	        collection.findOne({'id': id}, function(err, item) {
 	            res.jsonp(item);
