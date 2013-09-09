@@ -23,7 +23,6 @@ exports.findById = function(req, res) {
 	    });
 };
 exports.postedByUser = function(req, res) {
-	    console.log(req.params);
 	    var id = parseInt(req.params.id);
 	    console.log('findById: ' + id);
 	    db.collection('employees', function(err, collection) {
@@ -35,15 +34,13 @@ exports.postedByUser = function(req, res) {
 };
 exports.postJob = function(req, res) {
 		var id = parseInt(req.params.id);
-		console.log('posted request =' + req);
-		console.log('posted request =' + req.params);
-		console.log('posted request =' + req.body);
-		console.log('posted request =' + req.body.title);
 		var employees = [
 				req.body
 		  ];
 		db.collection('job_posting', function(err, collection) {
-		        collection.insert(employees, {safe:true}, function(err, result) {});
+		        collection.insert(employees, {safe:true}, function(err, result) {
+					console.log(result);
+				});
 		});
 	    res.jsonp(employees[0]);
 };
