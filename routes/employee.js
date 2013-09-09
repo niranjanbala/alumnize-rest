@@ -12,13 +12,12 @@ MongoClient.connect("mongodb://heroku_app17819681:rhnmk5dv8hcg0ppbq35kav284l@ds0
     db=mDb;
     db.collection('employees', {strict:true}, function(err, collection) {
         if (err) {
-            console.log("The 'employees' collection doesn't exist. Creating it with sample data...");
             populateDB();
         }
     });
 
 });
- 
+
 exports.findById = function(req, res) {
     console.log(req.params);
     var id = parseInt(req.params.id);
@@ -56,12 +55,12 @@ exports.findAll = function(req, res) {
         }
     });
 };
- 
+
 /*--------------------------------------------------------------------------------------------------------------------*/
 // Populate database with sample data -- Only used once: the first time the application is started.
 // You'd typically not find this code in a real-life app, since the database would already exist.
 var populateDB = function() {
- 
+
     console.log("Populating employee database...");
     var employees = [
         {"id": 1, "firstName": "James", "lastName": "King", "fullName": "James King", "managerId": 0, managerName: "", "title": "President and CEO", "department": "Corporate", "cellPhone": "617-000-0001", "officePhone": "781-000-0001", "email": "jking@fakemail.com", "city": "Boston, MA", "pic": "james_king.jpg", "twitterId": "@fakejking", "blog": "http://coenraets.org"},
@@ -77,9 +76,9 @@ var populateDB = function() {
         {"id": 11, "firstName": "Amy", "lastName": "Jones", "fullName": "Amy Jones", "managerId": 5, managerName: "Ray Moore", "title": "Sales Representative", "department": "Sales", "cellPhone": "617-000-0011", "officePhone": "781-000-0011", "email": "ajones@fakemail.com", "city": "Boston, MA", "pic": "amy_jones.jpg", "twitterId": "@fakeajones", "blog": "http://coenraets.org"},
         {"id": 12, "firstName": "Steven", "lastName": "Wells", "fullName": "Steven Wells", "managerId": 4, managerName: "John Williams", "title": "Software Architect", "department": "Engineering", "cellPhone": "617-000-0012", "officePhone": "781-000-0012", "email": "swells@fakemail.com", "city": "Boston, MA", "pic": "steven_wells.jpg", "twitterId": "@fakeswells", "blog": "http://coenraets.org"}
     ];
- 
+
     db.collection('employees', function(err, collection) {
         collection.insert(employees, {safe:true}, function(err, result) {});
     });
- 
+
 };
