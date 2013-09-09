@@ -18,7 +18,7 @@ app.get('/employees/:id', wines.findById);
 app.get('/employees', wines.findAll);
 app.get('/employees/:id/jobPosts',jobs.postedByUser);
 app.post('/employees/:id/postJob',jobs.postJob);
-app.get('/jobPosts', jobs.findAll);
+app.get('/employees/:id/searchJobs', jobs.findAll);
 http.createServer(app).listen(app.get('port'), function () {
     console.log("Express server listening on port " + app.get('port'));
 });

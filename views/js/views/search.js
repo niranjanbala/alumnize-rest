@@ -1,4 +1,10 @@
 directory.SearchView = Backbone.View.extend({
+	    events: {
+		        "click .search" : "search"
+	    },
+	search: function() {
+		console.log('search');
+	}
     render: function () {
         this.$el.html(this.template(this.model.attributes));
         $('#search', this.el).html(new directory.SearchFormView({model:this.model}).render().el);
@@ -115,7 +121,7 @@ directory.NewJobPostView = Backbone.View.extend({
             success: function (model) {
                 self.render();
                 console.log(model);
-                //app.navigate('employees/' + model.postedBy.id, false);
+                app.navigate('employees/' + model.postedBy.id, false);
                 directory.utils.showAlert('Success!', 'Job posted successfully', 'alert-success');
             },
             error: function () {

@@ -12,24 +12,24 @@ MongoClient.connect("mongodb://heroku_app17819681:rhnmk5dv8hcg0ppbq35kav284l@ds0
     db=mDb;
 });
 exports.findById = function(req, res) {
-	    console.log(req.params);
 	    var id = parseInt(req.params.id);
-	    console.log('findById: ' + id);
-	    db.collection('employees', function(err, collection) {
-	        collection.findOne({'id': id}, function(err, item) {
+	    db.collection('job_posting', function(err, collection) {
+	        collection.findOne({'_id': id}, function(err, item) {
 	            console.log(item);
 	            res.jsonp(item);
 	        });
 	    });
 };
 exports.postedByUser = function(req, res) {
-	    var id = parseInt(req.params.id);
-	    console.log('findById: ' + id);
-	    db.collection('employees', function(err, collection) {
-	        collection.findOne({'id': id}, function(err, item) {
-	            console.log(item);
-	            res.jsonp(item);
-	        });
+	    var postedByUserId = parseInt(req.params.id);
+	    db.collection('job_posting', function(err, collection) {
+	            collection.find(
+						{
+							"postedb.id": postedByUserId
+						}
+				).toArray(function(err, items) {
+	                res.jsonp(items);
+	            });
 	    });
 };
 exports.postJob = function(req, res) {
@@ -45,5 +45,13 @@ exports.postJob = function(req, res) {
 	    res.jsonp(employees[0]);
 };
 exports.findAll = function(req, res) {
-
+	    var title = req.query["title"];
+	    var description = req.query["description"];
+	    var company = req.query["description"];
+	    var userId = parseInt(req.params.id);
+	    console.log(title);
+	    console.log(description);
+	    console.log(company);
+	    console.log(userId);
+		res.jsonp({});
 };
