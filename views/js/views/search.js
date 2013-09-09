@@ -2,14 +2,17 @@ directory.SearchView = Backbone.View.extend({
 	 events: {
 		        "click .search" : "search"
 	    },
+	var jobPostingSearch;
 	search: function() {
+		console.log(this.jobPostingSearch);
 		console.log('search');
 	},
     render: function () {
+		this.jobPostingSearch=new directory.JobPosting();
         this.$el.html(this.template(this.model.attributes));
-        $('#search', this.el).html(new directory.SearchFormView({model:this.model}).render().el);
+        $('#search', this.el).html(new directory.SearchFormView({model:this.jobPostingSearch}).render().el);
         var searchResults=new directory.JobPostingCollection();
-        $('#results', this.el).append(new directory.SearchListView({model: searchResults}).render().el);
+        $('#results', this.el).html(new directory.SearchListView({model: searchResults}).render().el);
         return this;
     }
 });
